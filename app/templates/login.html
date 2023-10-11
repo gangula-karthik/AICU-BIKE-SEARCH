@@ -1,16 +1,22 @@
-{% extends "index.html" %}
+{% extends "index.html" %} {% block header %}
+<style>
+  main > div > h1 {
+    text-align: center;
+    font-size: 2vw;
+  }
 
-{% block scripts %}
-    
-{% endblock %}
-
-{% block header %}
-    <link rel="stylesheet" href="../static/login.css"></link>
-    <title>AICU</title>
-{% endblock %}
-
-{% block content %}
-    <h1>Welcome to AICU!</h1>
-    <img src="../static/aicu_logo.png" alt="aicu_logo"/> 
-    <img src="../static/log-in-with-singpass---red-inline-x3---recommended.png" alt="singpass-login-icon"/> 
+  main > div > img {
+    position: relative;
+    right: 20px;
+    width: 130%;
+  }
+</style>
+<title>AICU</title>
+{% endblock %} {% block content %}
+<h1>Welcome to AICU!</h1>
+<img src="../static/aicu_logo.png" alt="aicu_logo" />
+<img
+  src="../static/log-in-with-singpass---red-inline-x3---recommended.png"
+  alt="singpass-login-icon"
+/>
 {% endblock %}

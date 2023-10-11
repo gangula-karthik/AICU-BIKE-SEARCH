@@ -3,17 +3,55 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../static/index.css"></link>
-    {% block header %}
-    {% endblock %}
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        color: white;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+
+      main {
+        background-color: #242c3b;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        height: 86%;
+        width: 21%;
+      }
+
+      #skeleton {
+        height: 90%;
+        width: 23%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        z-index: 1;
+      }
+
+      main > div {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+    </style>
+    {% block header %} {% endblock %}
   </head>
   <body>
-    <img src="../static/phone_skeleton.png" alt="phone skeleton" id="skeleton"/> 
-      <main>
-        <div>
-          {% block content %}
-          {% endblock %}
-        </div>
-      </main>
+    <img
+      src="../static/phone_skeleton.png"
+      alt="phone skeleton"
+      id="skeleton"
+    />
+    <main>
+      <div>{% block content %} {% endblock %}</div>
+    </main>
   </body>
 </html>
