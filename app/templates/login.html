@@ -1,26 +1,27 @@
 {% extends "index.html" %} {% block header %}
 
 <style>
-  main > div > h1 {
-    text-align: center;
-    font-size: 2vw;
+  section h1 {
+    font-size: 30px;
+    width: 80%;
+    margin: 0 auto;
   }
 
   section {
     position: absolute;
     top: 20%;
-    left: 0%;
     text-align: center;
   }
 
-  h1 {
-    font-size: 30px;
+  @media only screen and (max-width: 500px) {
+    section h1 {
+      font-size: 50px;
+    }
   }
 </style>
 
-<title>AICU</title>
-{% endblock %} 
-{% block content %}
+<title>AICU | Login</title>
+{% endblock %} {% block content %}
 <section>
   <h1>Welcome to AICU!</h1>
   <img src="../static/aicu_logo.png" alt="aicu_logo" width="70%" />
