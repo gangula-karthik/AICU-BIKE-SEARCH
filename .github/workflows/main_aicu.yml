@@ -1,0 +1,51 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy container app to Azure Web App - aicu
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: 'ubuntu-latest'
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Log in to registry
+      uses: docker/login-action@v2
+      with:
+        registry: https://aicuapp.azurecr.io/
+        username: ${{ secrets.AzureAppService_ContainerUsername_901f3fbc90334da09aa92fe72f1f2647 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_bc110456137c4c1f9ae2cb7b2b0140ca }}
+
+    - name: Build and push container image to registry
+      uses: docker/build-push-action@v3
+      with:
+        push: true
+        tags: aicuapp.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_901f3fbc90334da09aa92fe72f1f2647 }}/fooyongxiang/aicu-app:${{ github.sha }}
+        file: ./Dockerfile
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+    - name: Deploy to Azure Web App
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'aicu'
+        slot-name: 'production'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_e3d33553cfb141d4ac0e818599348480 }}
+        images: 'aicuapp.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_901f3fbc90334da09aa92fe72f1f2647 }}/fooyongxiang/aicu-app:${{ github.sha }}'
