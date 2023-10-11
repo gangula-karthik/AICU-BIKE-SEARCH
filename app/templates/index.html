@@ -3,17 +3,46 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../static/index.css"></link>
-    <title>AICU</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        color: white;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+
+      main {
+        background-color: #242c3b;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        height: 86%;
+        width: 21%;
+      }
+
+      #skeleton {
+        height: 90%;
+        width: 23%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+    </style>
+    {% block header %} {% endblock %}
   </head>
   <body>
-    <img src="../static/phone_skeleton.png" alt="phone skeleton" id="skeleton"/> 
+    <img
+      src="../static/phone_skeleton.png"
+      alt="phone skeleton"
+      id="skeleton"
+    />
     <main>
-        <div>
-        <h1>Welcome to AICU!</h1>
-        <img src="../static/aicu_logo.png" alt="aicu_logo"/> 
-        <img src="../static/log-in-with-singpass---red-inline-x3---recommended.png" alt="singpass-login-icon"/> 
-        </div>
+      {% block content %} {% endblock %}
     </main>
   </body>
 </html>
