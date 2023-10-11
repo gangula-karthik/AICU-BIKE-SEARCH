@@ -1,0 +1,22 @@
+{% extends "index.html" %} 
+{% block header %}
+<style>
+  main > div > h1 {
+    text-align: center;
+    font-size: 2vw;
+  }
+
+  main > div > img {
+    position: relative;
+    right: 20px;
+    width: 130%;
+  }
+</style>
+<title>AICU</title>
+{% endblock %} 
+
+{% block content %}
+<h1>Tap QR code to log in with Singpass app</h1>
+<img src="../static/qr_code.jpg" alt="qr_code" />
+<a href="qr_code.html"></a>
+{% endblock %}

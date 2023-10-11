@@ -1,22 +1,35 @@
 {% extends "index.html" %} {% block header %}
+
 <style>
   main > div > h1 {
     text-align: center;
     font-size: 2vw;
   }
 
-  main > div > img {
-    position: relative;
-    right: 20px;
-    width: 130%;
+  section {
+    position: absolute;
+    top: 20%;
+    left: 0%;
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 30px;
   }
 </style>
+
 <title>AICU</title>
-{% endblock %} {% block content %}
-<h1>Welcome to AICU!</h1>
-<img src="../static/aicu_logo.png" alt="aicu_logo" />
-<img
-  src="../static/log-in-with-singpass---red-inline-x3---recommended.png"
-  alt="singpass-login-icon"
-/>
+{% endblock %} 
+{% block content %}
+<section>
+  <h1>Welcome to AICU!</h1>
+  <img src="../static/aicu_logo.png" alt="aicu_logo" width="70%" />
+  <a href="{{url_for('qr_code')}}">
+    <img
+      src="../static/log-in-with-singpass---red-inline-x3---recommended.png"
+      alt="singpass-login-icon"
+      width="70%"
+    />
+  </a>
+</section>
 {% endblock %}
