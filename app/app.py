@@ -20,5 +20,9 @@ def qr_code():
     return render_template('qr_code.html')
 
 
+@app.route('/approving_login')
+def approving_login():
+    return render_template('approving_login.html')
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=80)
