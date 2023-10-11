@@ -1,0 +1,80 @@
+{% extends "index.html" %} 
+{% block header %}
+<style>
+  main > div > h2 {
+    text-align: center;
+  }
+
+  main > div > img {
+    position: relative;
+    right: 20px;
+    width: 130%;
+  }
+
+   section {
+    position: absolute;
+    top: 20%;
+    left: 0%;
+    text-align: center;
+  }
+
+  /* Arrow Styling */
+.backArrow {
+    font-size: 25px;
+    line-height: 25px;
+
+    width: 1em;
+    height: 1em;
+    padding: 6px;
+
+    cursor: pointer;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    transform: rotate(180deg);
+
+    color: white;
+    border: 2px solid white;
+    border-radius: 50%;
+
+    -webkit-touch-callout: none;
+     -khtml-user-select: none;
+}
+
+.backArrow:hover {
+    background: rgba(255,255,255,.5);
+}
+
+/* .backArrow:active {
+    position: absolute;
+    right: 2px;
+} */
+
+.container {
+  position: absolute;
+  top: 5%;
+}
+
+a {
+  text-decoration: none;
+}
+</style>
+
+<title>AICU</title>
+{% endblock %} 
+
+{% block content %}
+<a href="{{url_for('login')}}">
+<div class="container">
+  <div title="Back to Menu" class="backArrow">
+    &#10140;
+  </div>  
+</div>
+</a>
+<section>
+<p><strong>Tap QR code to log in with Singpass app</strong></p>
+<br><br>
+<a href="{{url_for('approving_login')}}"><img src="../static/qr_code.jpg" alt="qr_code" width="70%"/></a>
+</section>
+{% endblock %}
