@@ -35,14 +35,3 @@ main > div {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-
-main > div > h1 {
-  text-align: center;
-  font-size: 2vw;
-}
-
-main > div > img {
-  position: relative;
-  right: 20px;
-  width: 130%;
-}
