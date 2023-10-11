@@ -1,80 +1,65 @@
-{% extends "index.html" %} 
-{% block header %}
+{% extends "index.html" %} {% block header %}
 <style>
-  main > div > h2 {
-    text-align: center;
-  }
-
-  main > div > img {
-    position: relative;
-    right: 20px;
-    width: 130%;
-  }
-
-   section {
+  section {
     position: absolute;
     top: 20%;
-    left: 0%;
     text-align: center;
   }
 
-  /* Arrow Styling */
-.backArrow {
+  .backArrow {
     font-size: 25px;
     line-height: 25px;
-
-    width: 1em;
-    height: 1em;
+    width: 25px;
+    height: 25px;
     padding: 6px;
-
     cursor: pointer;
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     transform: rotate(180deg);
-
-    color: white;
     border: 2px solid white;
     border-radius: 50%;
-
     -webkit-touch-callout: none;
-     -khtml-user-select: none;
-}
+    -khtml-user-select: none;
+  }
 
-.backArrow:hover {
-    background: rgba(255,255,255,.5);
-}
+  .backArrow:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
 
-/* .backArrow:active {
+  .container {
     position: absolute;
-    right: 2px;
-} */
+    top: 10%;
+    left: 8%;
+  }
 
-.container {
-  position: absolute;
-  top: 5%;
-}
-
-a {
-  text-decoration: none;
-}
+  @media only screen and (max-width: 500px) {
+    * {
+      font-size: 1.3rem;
+    }
+    .backArrow {
+      font-size: 35px;
+      line-height: 35px;
+      width: 35px;
+      height: 35px;
+    }
+  }
 </style>
 
-<title>AICU</title>
-{% endblock %} 
-
-{% block content %}
+<title>AICU | QR Code</title>
+{% endblock %} {% block content %}
 <a href="{{url_for('login')}}">
-<div class="container">
-  <div title="Back to Menu" class="backArrow">
-    &#10140;
-  </div>  
-</div>
+  <div class="container">
+    <div title="Back to Menu" class="backArrow">&#10140;</div>
+  </div>
 </a>
 <section>
-<p><strong>Tap QR code to log in with Singpass app</strong></p>
-<br><br>
-<a href="{{url_for('approving_login')}}"><img src="../static/qr_code.jpg" alt="qr_code" width="70%"/></a>
+  <h2>Tap QR code</h2>
+  <p>to log in with Singpass app</p>
+  <br />
+  <a href="{{url_for('approving_login')}}"
+    ><img src="../static/qr_code.jpg" alt="qr_code" width="70%"
+  /></a>
 </section>
 {% endblock %}
