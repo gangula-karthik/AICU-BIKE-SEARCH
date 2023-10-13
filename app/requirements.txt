@@ -61,3 +61,5 @@ wcwidth==0.2.8
 webdriver-manager==4.0.1
 Werkzeug==2.3.7
 wsproto==1.2.0
+pyodbc==5.0.0
+
