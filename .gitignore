@@ -1,4 +1,5 @@
 .venv
 venv
 .idea
-app/venv
+app/__pycache__
+.DS_Store
