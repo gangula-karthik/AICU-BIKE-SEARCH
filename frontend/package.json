@@ -1,0 +1,42 @@
+{
+  "name": "spirals",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format:write": "prettier --write \"**/*.{css,js,json,jsx,ts,tsx}\"",
+    "format": "prettier \"**/*.{css,js,json,jsx,ts,tsx}\""
+  },
+  "dependencies": {
+    "@radix-ui/react-popover": "^1.0.6",
+    "@types/node": "20.6.2",
+    "@types/react": "latest",
+    "@types/react-dom": "18.2.7",
+    "@vercel/analytics": "^1.0.2",
+    "@vercel/blob": "^0.12.4",
+    "@vercel/kv": "^0.2.3",
+    "autoprefixer": "10.4.15",
+    "clsx": "^2.0.0",
+    "eslint": "8.49.0",
+    "eslint-config-next": "13.4.19",
+    "lucide-react": "^0.279.0",
+    "next": "canary",
+    "postcss": "8.4.30",
+    "promptmaker": "^1.1.0",
+    "react": "latest",
+    "react-dom": "18.2.0",
+    "replicate": "^0.18.0",
+    "sonner": "^1.0.3",
+    "tailwind-merge": "^1.14.0",
+    "tailwindcss": "3.3.3",
+    "typescript": "5.2.2",
+    "vaul": "^0.6.5"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.4"
+  }
+}
