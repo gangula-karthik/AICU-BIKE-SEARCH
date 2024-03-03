@@ -9,17 +9,6 @@ import chromadb
 
 app = FastAPI()
 
-class ImageResponse(BaseModel):
-    success: bool
-    message: str
-    data: Optional[str] = None
-
-class TextResponse(BaseModel):
-    success: bool
-    message: str
-    data: Optional[str] = None
-
-
 def setup_chromadb():
     chroma_client = chromadb.PersistentClient(path="../data/AICU-VECTOR-DB")
     collection = chroma_client.get_collection(name="aicu-bike-search")
