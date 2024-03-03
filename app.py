@@ -2,9 +2,9 @@ from fastapi import FastAPI, UploadFile, Form, HTTPException
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from typing import Optional
-from emojii_and_emoticon_map import EMOTICONS_EMO, EMOJI_UNICODE
-from preprocess_data import *
-from querying_data import process_and_query_text, process_and_query_image_url
+from app.emojii_and_emoticon_map import EMOTICONS_EMO, EMOJI_UNICODE
+from app.preprocess_data import *
+from app.querying_data import process_and_query_text, process_and_query_image_url
 import chromadb
 
 app = FastAPI()
