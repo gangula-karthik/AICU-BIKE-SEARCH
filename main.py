@@ -1,3 +1,5 @@
+import sys
+sys.path.append('./app')
 from fastapi import FastAPI, UploadFile, Form, HTTPException
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
@@ -10,9 +12,13 @@ import chromadb
 app = FastAPI()
 
 def setup_chromadb():
-    chroma_client = chromadb.PersistentClient(path="../data/AICU-VECTOR-DB")
+    chroma_client = chromadb.PersistentClient(path="./data/AICU-VECTOR-DB")
     collection = chroma_client.get_collection(name="aicu-bike-search")
     return collection
+
+@app.get("/")
+async def root():
+    return {"message": "Welcome to the AICU API! Go to /docs to see the API documentation."}
 
 @app.on_event("startup")
 async def startup_event():
