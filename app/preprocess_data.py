@@ -10,7 +10,7 @@ import string
 
 
 # FUNCTIONS TO LOAD THE CLIP MODEL
-def load_clip_model(device='cuda'):
+def load_clip_model(device):
     '''Load the CLIP model and return the model, utils and params.'''
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger(__name__)

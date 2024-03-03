@@ -5,7 +5,7 @@ from io import BytesIO
 import numpy as np
 import requests
 
-def process_and_query_text(text, model, device, collection, n_results=5):
+def process_and_query_text(text, model, device, collection, n_results=6):
     model.eval()
     model.to(device)
     
@@ -23,7 +23,7 @@ def process_and_query_text(text, model, device, collection, n_results=5):
     return results
 
 
-def process_and_query_image_url(image_input, model, device, collection, n_results=5):
+def process_and_query_image_url(image_input, model, device, collection, n_results=6):
     model.eval()
     model.to(device)
     
