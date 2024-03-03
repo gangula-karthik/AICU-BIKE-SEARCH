@@ -5,9 +5,22 @@ from typing import Optional
 from emojii_and_emoticon_map import EMOTICONS_EMO, EMOJI_UNICODE
 from preprocess_data import *
 from querying_data import process_and_query_text, process_and_query_image_url
+import chromadb
 
 app = FastAPI()
 
+def setup_chromadb():
+    chroma_client = chromadb.PersistentClient(path="../data/AICU-VECTOR-DB")
+    collection = chroma_client.get_collection(name="aicu-bike-search")
+    return collection
+
+@app.on_event("startup")
+async def startup_event():
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger(__name__)
+    global collection
+    collection = setup_chromadb()
+    logger.info("ChromaDB collection initialized.")
 
 class ImageResponse(BaseModel):
     success: bool
