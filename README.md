@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://github.com/gangula-karthik/AICU-APP/assets/56480632/08fe215c-2fab-4173-aca7-c26e0611db0d" alt="AICU Logo" width="350"/>
+</p>
+
 # AICU App
 Welcome to AICU (Artificial Intelligence sees you) 🤖👁️🫵 - your digital detective in the quest to reunite you with your stolen bikes! Leveraging the cutting-edge technology of OpenAI's CLIP, AICU transforms the way you search for your stolen bicycles on online marketplaces like Carousell in Singapore.
 
