@@ -1,40 +1,56 @@
-# Next.js & NextUI Template
+<a href="https://spirals.vercel.app">
+  <img alt="Spirals – Generate beautiful AI spiral art with one click." src="/app/opengraph-image.png">
+  <h1 align="center">Spirals</h1>
+</a>
 
-This is a template for creating applications using Next.js 13 (app directory) and NextUI (v2).
+<p align="center">
+  Generate beautiful AI spiral art with one click. Powered by Vercel and Replicate.
+</p>
 
-## Technologies Used
+<p align="center">
+  <a href="https://twitter.com/steventey">
+    <img src="https://img.shields.io/twitter/follow/steventey?style=flat&label=steventey&logo=twitter&color=0bf&logoColor=fff" alt="Steven Tey Twitter follower count" />
+  </a>
+  <a href="https://github.com/steven-tey/spirals">
+    <img src="https://img.shields.io/github/stars/steven-tey/spirals?label=steven-tey%2Fspirals" alt="Spirals repo star count" />
+  </a>
+</p>
 
-- [Next.js 13](https://nextjs.org/docs/getting-started)
-- [NextUI v2](https://nextui.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
+<p align="center">
+  <a href="#introduction"><strong>Introduction</strong></a> ·
+  <a href="#tech-stack"><strong>Tech Stack</strong></a> ·
+  <a href="#deploy-your-own"><strong>Deploy Your Own</strong></a> ·
+  <a href="#author"><strong>Author</strong></a>
+</p>
+<br/>
 
-## How to Use
+## Introduction
 
+Spirals is an AI app for you to generate beautiful spiral art with one click. Powered by Vercel and Replicate.
 
-### Use the template with create-next-app
+https://github.com/steven-tey/spirals/assets/28986134/9f0202d4-2a31-47a0-b43f-bdcd189743ef
 
-To create a new project based on this template using `create-next-app`, run the following command:
+## Tech Stack
 
-```bash
-npx create-next-app -e https://github.com/nextui-org/next-app-template
-```
+- Next.js [App Router](https://nextjs.org/docs/app)
+- Next.js [Server Actions](https://nextjs.org/docs/app/api-reference/functions/server-actions)
+- [Bun](https://bun.sh/) for compilation
+- [Vercel Blob](https://vercel.com/storage/blob) for image storage
+- [Vercel KV](https://vercel.com/storage/kv) for redis
+- [`promptmaker`](https://github.com/zeke/promptmaker) lib by @zeke for generating random prompts
 
-### Install dependencies
+## Deploy Your Own
 
-```bash
-npm install
-```
+You can deploy this template to Vercel with the button below:
 
-### Run the development server
+[![Deploy with Vercel](https://vercel.com/button)](https://stey.me/spirals-deploy)
 
-```bash
-npm run dev
-```
+Note that you'll need to:
 
-## License
+- Set up a [Replicate](https://replicate.com) account to get the `REPLICATE_API_TOKEN` env var.
+- Set up [Vercel KV](https://vercel.com/docs/storage/vercel-kv/quickstart) to get the
+- Set up [Vercel Blob](https://vercel.com/docs/storage/vercel-blob/quickstart)
 
-Licensed under the [MIT license](https://github.com/nextui-org/next-app-template/blob/main/LICENSE).
+## Author
+
+- Steven Tey ([@steventey](https://twitter.com/steventey))
