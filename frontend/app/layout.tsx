@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 import { Github, BuyMeACoffee } from "@/components/icons";
 import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "sonner";
-import {NextUIProvider} from "@nextui-org/react";
 
 
 const clash = localFont({
@@ -22,10 +21,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Spirals",
+  title: "AICU",
   description:
-    "Generate beautiful AI spiral art with one click. Powered by Vercel and Replicate.",
-  metadataBase: new URL("https://spirals.vercel.app"),
+    "Find your stolen bikes online. Powered by clip & chromadb.",
+  metadataBase: new URL("https://aicu.vercel.app"),
 };
 
 export default function RootLayout({

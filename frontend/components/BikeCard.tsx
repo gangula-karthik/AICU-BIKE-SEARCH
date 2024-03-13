@@ -12,7 +12,7 @@ import { Card, CardHeader, CardFooter, Image, Button, Chip } from '@nextui-org/r
 
 const BikeCard: React.FC<BikeCardProps> = ({ imageUrl, bikeName, description }) => {
   return (
-    <Card isFooterBlurred className="w-[400px] h-[250px] col-span-12 sm:col-span-7">
+    <Card isFooterBlurred className="w-[400px] h-[250px]">
       <CardHeader className="absolute z-10 top-1 flex-col items-start">
         <Chip color="primary">
           <h4 className="text-white/90">{bikeName}</h4>
