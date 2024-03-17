@@ -1,14 +1,15 @@
 "use client"
 
 interface BikeCardProps {
-    imageUrl: string;
-    bikeName: string;
-    description: string;
-  }
+  imageUrl: string;
+  bikeName: string;
+  description: string;
+  source: string;
+}
 
-  
+
 import React from 'react';
-import { Card, CardHeader, CardFooter, Image, Button, Chip } from '@nextui-org/react';
+import { Card, CardHeader, CardFooter, Image, Button, Chip, Link } from '@nextui-org/react';
 
 const BikeCard: React.FC<BikeCardProps> = ({ imageUrl, bikeName, description }) => {
   return (
@@ -30,7 +31,7 @@ const BikeCard: React.FC<BikeCardProps> = ({ imageUrl, bikeName, description }) 
             <p className="text-tiny text-white/60">{description}</p>
           </div>
         </div>
-        <Button color="primary" radius="full" size="sm">View It 🚀</Button>
+        <Button as={Link} color="primary" radius="full" size="sm">View It 🚀</Button>
       </CardFooter>
     </Card>
   );

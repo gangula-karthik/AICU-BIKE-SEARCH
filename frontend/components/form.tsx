@@ -30,8 +30,7 @@ const uploadProps = {
 
 export default function App() {
   const [prompt, setPrompt] = useState("");
-  const [bikesData, setBikesData] = useState(null);
-
+  const [bikes, setBikes] = useState({ metadatas: [], documents: [] });
 
   const handleSubmitText = async () => {
     try {
@@ -52,6 +51,7 @@ export default function App() {
 
       const data = await response.json();
       console.log(data);
+      setBikes(data.results);
       toast.success('Text submitted successfully.');
     } catch (error) {
       console.error('Failed to submit text:', error);
@@ -146,11 +146,32 @@ export default function App() {
       </div>
       <div className="w-full px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9">
-          <BikeCard
-          imageUrl="https://media.karousell.com/media/photos/products/2024/3/11/santa_cruz_blur_c_size_l_1710170584_6909f8ff_progressive.jpg"
-          bikeName="Bicycle Foldable Bike"
-          description="All in good condition! Used a few times only. Can test ride."
-        />
+          {
+            bikes.metadatas && bikes.metadatas[0] && bikes.documents && bikes.documents[0] && bikes.metadatas[0].length > 0 ? (
+              bikes.metadatas[0].map((metadata, index) => {
+                const fullDescription = bikes.documents[0][index];
+                const description = fullDescription.length > 100 ? `${fullDescription.substring(0, 100)}...` : fullDescription;
+
+                const fullBikeName = metadata.product_name;
+                const bikeName = fullBikeName.length > 10 ? `${fullBikeName.substring(0, 100)}...` : fullBikeName;
+
+                const { image_url: imageUrl, source } = metadata;
+
+                return (
+                  <BikeCard
+                    key={source} // Consider using a more unique key if possible
+                    imageUrl={imageUrl}
+                    bikeName={bikeName}
+                    description={description}
+                    source={source}
+                  />
+                );
+              })
+            ) : (
+              <p>No bikes available.</p> // Display this or any placeholder when there are no bikes
+            )
+          }
+
         </div>
       </div>
     </div>
