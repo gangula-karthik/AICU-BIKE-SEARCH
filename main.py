@@ -7,9 +7,26 @@ from typing import Optional
 from app.emojii_and_emoticon_map import EMOTICONS_EMO, EMOJI_UNICODE
 from app.preprocess_data import *
 from app.querying_data import process_and_query_text, process_and_query_image_url
+from fastapi.middleware.cors import CORSMiddleware
 import chromadb
 
 app = FastAPI()
+
+class TextRequest(BaseModel):
+    text: str
+
+origins = [
+    "http://localhost:3000", 
+    "http://127.0.0.1:3000",  
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"], 
+    allow_headers=["*"],  
+)
 
 def setup_chromadb():
     chroma_client = chromadb.PersistentClient(path="./data/AICU-VECTOR-DB")
@@ -39,7 +56,7 @@ async def process_image_and_query(url: str):
         raise HTTPException(status_code=400, detail="Failed to process image.")
     
 @app.post("/process_text/")
-async def process_text(text: str):
+async def process_text(text):
     processed_text = remove_punct(text)
     processed_text = remove_emojis_and_emoticons(processed_text)
     processed_text = mask_all(processed_text)
