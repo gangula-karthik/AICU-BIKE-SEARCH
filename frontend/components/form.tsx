@@ -30,6 +30,8 @@ const uploadProps = {
 
 export default function App() {
   const [prompt, setPrompt] = useState("");
+  const [bikesData, setBikesData] = useState(null);
+
 
   const handleSubmitText = async () => {
     try {
@@ -49,7 +51,7 @@ export default function App() {
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
       const data = await response.json();
-      console.log(data); // Or handle the response data as needed
+      console.log(data);
       toast.success('Text submitted successfully.');
     } catch (error) {
       console.error('Failed to submit text:', error);
@@ -129,7 +131,7 @@ export default function App() {
           .
         </p>
         <div className="mb-8">
-          <div className="flex w-full flex-col min-h-[200px] pt-4">
+          <div className="flex w-full flex-col min-h-[290px] pt-4">
             <Tabs aria-label="Content tabs" color="primary" variant="light" size="sm" radius='full'>
               {tabs.map((tab) => (
                 <Tab key={tab.id} title={tab.label}>
@@ -145,16 +147,6 @@ export default function App() {
       <div className="w-full px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9">
           <BikeCard
-          imageUrl="https://media.karousell.com/media/photos/products/2024/3/11/santa_cruz_blur_c_size_l_1710170584_6909f8ff_progressive.jpg"
-          bikeName="Bicycle Foldable Bike"
-          description="All in good condition! Used a few times only. Can test ride."
-        />
-        <BikeCard
-          imageUrl="https://media.karousell.com/media/photos/products/2024/3/11/santa_cruz_blur_c_size_l_1710170584_6909f8ff_progressive.jpg"
-          bikeName="Bicycle Foldable Bike"
-          description="All in good condition! Used a few times only. Can test ride."
-        />
-        <BikeCard
           imageUrl="https://media.karousell.com/media/photos/products/2024/3/11/santa_cruz_blur_c_size_l_1710170584_6909f8ff_progressive.jpg"
           bikeName="Bicycle Foldable Bike"
           description="All in good condition! Used a few times only. Can test ride."
