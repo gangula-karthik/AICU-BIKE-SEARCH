@@ -21,6 +21,7 @@
     "@vercel/kv": "^0.2.3",
     "antd": "^5.15.3",
     "autoprefixer": "10.4.15",
+    "axios": "^1.6.8",
     "clsx": "^2.0.0",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",

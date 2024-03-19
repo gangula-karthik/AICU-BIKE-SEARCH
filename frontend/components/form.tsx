@@ -6,31 +6,61 @@ import { toast } from 'sonner';
 import { InboxOutlined } from '@ant-design/icons';
 import { Upload, message } from 'antd';
 import BikeCard from './BikeCard';
+import axios from 'axios';
 const { Dragger } = Upload;
 
-const uploadProps = {
-  name: 'file',
-  multiple: true,
-  action: 'https://run.mocky.io/v3/eae189a5-9a64-4b52-8f8b-375a25d98481',
-  onChange(info) {
-    const { status } = info.file;
-    if (status !== 'uploading') {
-      console.log(info.file, info.fileList);
-    }
-    if (status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === 'error') {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-  onDrop(e) {
-    console.log('Dropped files', e.dataTransfer.files);
-  },
-};
+
 
 export default function App() {
   const [prompt, setPrompt] = useState("");
   const [bikes, setBikes] = useState({ metadatas: [], documents: [] });
+
+  const uploadProps = {
+    name: 'file',
+    multiple: true,
+    customRequest: async (options) => {
+      const { onSuccess, onError, file, onProgress } = options;
+      
+      const formData = new FormData();
+      formData.append('file', file); 
+      
+      try {
+        const response = await axios.post('http://127.0.0.1:8000/process_image/', formData, {
+          onUploadProgress: ({ total, loaded }) => {
+            onProgress({ percent: Math.round((loaded / total) * 100) });
+          },
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        
+        setBikes(response.data.results); 
+        onSuccess(response.data, file); 
+      } catch (err) {
+        console.error('Upload failed:', err);
+        onError(err);
+        if (err.response) {
+          message.error('Upload failed: ' + err.response.data.detail);
+        } else {
+          message.error('Upload failed');
+        }
+      }
+    },
+    onChange(info) {
+      const { status } = info.file;
+      if (status !== 'uploading') {
+        console.log(info.file, info.fileList);
+      }
+      if (status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully.`);
+      } else if (status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+    onDrop(e) {
+      console.log('Dropped files', e.dataTransfer.files);
+    },
+  };
 
   const handleSubmitText = async () => {
     try {
@@ -64,7 +94,7 @@ export default function App() {
       id: "text",
       label: "✏️ Text Input",
       content: (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3">
           <Textarea
             value={prompt}
             onChange={(e) => setPrompt(e.currentTarget.value)}
@@ -81,7 +111,7 @@ export default function App() {
       id: "image",
       label: "📷 Image Upload",
       content: (
-        <div className="flex flex-col items-center justify-center p-1">
+        <div className="flex flex-col gap-3 items-center justify-center">
           <Dragger {...uploadProps}>
             <p className="ant-upload-drag-icon">
               <InboxOutlined />
@@ -159,7 +189,7 @@ export default function App() {
 
                 return (
                   <BikeCard
-                    key={source} // Consider using a more unique key if possible
+                    key={source}
                     imageUrl={imageUrl}
                     bikeName={bikeName}
                     description={description}
@@ -168,7 +198,7 @@ export default function App() {
                 );
               })
             ) : (
-              <p>No bikes available.</p> // Display this or any placeholder when there are no bikes
+              <p>No bikes available.</p>
             )
           }
 

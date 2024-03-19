@@ -1,6 +1,6 @@
 import sys
 sys.path.append('./app')
-from fastapi import FastAPI, UploadFile, Form, HTTPException
+from fastapi import FastAPI, UploadFile, Form, HTTPException, File
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from typing import Optional
@@ -46,14 +46,28 @@ async def startup_event():
     model, preprocess, _, _, _, _ = load_clip_model(device='cpu')
     logger.info("ChromaDB collection initialized.")
 
-@app.post("/process_image/")
-async def process_image_and_query(url: str):
-    img_input = prepare_image(url, preprocess)
-    if img_input is not None:
-        results = process_and_query_image_url(img_input, model, 'cpu', collection)
-        return {"results": results}
+async def prepare_image(file: UploadFile, preprocess):
+    img_bytes = await file.read()
+    img = Image.open(BytesIO(img_bytes)).convert("RGB")
+    
+    if img is not None:
+        img_input = preprocess(img).unsqueeze(0)
+        return img_input
     else:
-        raise HTTPException(status_code=400, detail="Failed to process image.")
+        return None
+
+@app.post("/process_image/")
+async def process_image_and_query(file: UploadFile = File(...)):
+    try:
+        img_input = await prepare_image(file, preprocess)
+        if img_input is not None:
+            results = process_and_query_image_url(img_input, model, 'cpu', collection)
+            print(results)
+            return {"results": results}
+        else:
+            raise HTTPException(status_code=400, detail="Failed to process image.")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
     
 @app.post("/process_text/")
 async def process_text(text):
