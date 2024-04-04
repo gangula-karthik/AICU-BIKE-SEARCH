@@ -51,7 +51,7 @@ export default function RootLayout({
             </Link>
             <div className="flex items-center space-x-4">
               <a
-                href="https://github.com/steven-tey/spirals"
+                href="https://github.com/gangula-karthik/AICU-BIKE-SEARCH"
                 target="_blank"
                 rel="noopener noreferrer"
               >
