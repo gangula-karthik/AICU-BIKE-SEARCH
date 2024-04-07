@@ -1,5 +1,7 @@
 <p align="center">
   <img src="https://github.com/gangula-karthik/AICU-APP/assets/56480632/08fe215c-2fab-4173-aca7-c26e0611db0d" alt="AICU Logo" width="350"/>
+  <br>
+  <i>Video Demo: https://www.youtube.com/watch?v=t4rZbfIGSLo</i>
 </p>
 
 # AICU App
