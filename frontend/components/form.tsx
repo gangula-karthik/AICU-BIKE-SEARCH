@@ -9,13 +9,28 @@ import BikeCard from './BikeCard';
 import axios from 'axios';
 const { Dragger } = Upload;
 
-
+interface UploadProps {
+  name: string;
+  multiple: boolean;
+  customRequest: (options: {
+    onSuccess: (file: File) => void;
+    onError: (error: Error) => void;
+    file: File;
+    onProgress: (percent: number) => void;
+  }) => void;
+  onChange: (info: {
+    file: File;
+    fileList: File[];
+    status: string;
+  }) => void;
+  onDrop: (e: React.DragEvent<HTMLDivElement>) => void;
+}
 
 export default function App() {
-  const [prompt, setPrompt] = useState("");
-  const [bikes, setBikes] = useState({ metadatas: [], documents: [] });
+  const [prompt, setPrompt] = useState<string>("");
+  const [bikes, setBikes] = useState<{ metadatas: any[], documents: any[] }>({ metadatas: [], documents: [] });
 
-  const uploadProps = {
+  const uploadProps: UploadProps = {
     name: 'file',
     multiple: true,
     customRequest: async (options) => {
@@ -27,27 +42,29 @@ export default function App() {
       try {
         const response = await axios.post('http://127.0.0.1:8000/process_image/', formData, {
           onUploadProgress: ({ total, loaded }) => {
-            onProgress({ percent: Math.round((loaded / total) * 100) });
+            if (total) {
+              onProgress(Math.round((loaded / total) * 100));
+            }
           },
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
-        
         setBikes(response.data.results); 
-        onSuccess(response.data, file); 
-      } catch (err) {
-        console.error('Upload failed:', err);
-        onError(err);
-        if (err.response) {
-          message.error('Upload failed: ' + err.response.data.detail);
+        onSuccess(file); 
+      } catch (error) {
+        console.error('Upload failed:', error);
+        if (error instanceof Error) {
+          onError(error);
+          message.error('Upload failed: ' + error.message);
         } else {
+          onError(new Error(String(error)));
           message.error('Upload failed');
         }
       }
     },
     onChange(info) {
-      const { status } = info.file;
+      const { status } = info;
       if (status !== 'uploading') {
         console.log(info.file, info.fileList);
       }
@@ -83,7 +100,7 @@ export default function App() {
       console.log(data);
       setBikes(data.results);
       toast.success('Text submitted successfully.');
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to submit text:', error);
       toast.error(`Failed to submit text: ${error.message}`);
     }
@@ -101,7 +118,7 @@ export default function App() {
             fullWidth
             placeholder="Prompt E.g.: 'White color HITO X4 FOLDING BIKE in excellent condition, featuring a lightweight aluminum frame and hydraulic disc brakes.'"
           />
-          <Button onClick={handleSubmitText} color="primary" auto>
+          <Button onClick={handleSubmitText} color="primary">
             Submit Text
           </Button>
         </div>
@@ -178,12 +195,12 @@ export default function App() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9">
           {
             bikes.metadatas && bikes.metadatas[0] && bikes.documents && bikes.documents[0] && bikes.metadatas[0].length > 0 ? (
-              bikes.metadatas[0].map((metadata, index) => {
+              bikes.metadatas[0].map((metadata: { product_name?: any; image_url?: any; source?: any; }, index: string | number) => {
                 const fullDescription = bikes.documents[0][index];
                 const description = fullDescription.length > 100 ? `${fullDescription.substring(0, 100)}...` : fullDescription;
 
                 const fullBikeName = metadata.product_name;
-                const bikeName = fullBikeName.length > 10 ? `${fullBikeName.substring(0, 100)}...` : fullBikeName;
+                // const bikeName = fullBikeName.length > 10 ? `${fullBikeName.substring(0, 100)}...` : fullBikeName;
 
                 const { image_url: imageUrl, source } = metadata;
 
@@ -191,7 +208,7 @@ export default function App() {
                   <BikeCard
                     key={source}
                     imageUrl={imageUrl}
-                    bikeName={bikeName}
+                    bikeName={fullBikeName}
                     description={description}
                     source={source}
                   />
